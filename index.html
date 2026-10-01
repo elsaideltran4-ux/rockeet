@@ -96,7 +96,7 @@ function closeProduct(){document.getElementById('productModal').classList.remove
 function checkout(){if(!cart.length)return alert('السلة فارغة');closeCart();document.getElementById('checkoutModal').classList.add('show')}function closeCheckout(){document.getElementById('checkoutModal').classList.remove('show')}
 function sendOrder(e){e.preventDefault();let lines=cart.map(i=>{let p=products.find(x=>x.id===i.id);return `• ${p.name} | ${i.size} | ${i.color} × ${i.qty} = ${money(p.price*i.qty)}`}).join('\n');let total=cart.reduce((a,i)=>a+(products.find(p=>p.id===i.id)?.price||0)*i.qty,0);let msg=`طلب جديد من THE ROCKET 🚀\n\n${lines}\n\nالإجمالي: ${money(total)}\nالاسم: ${cname.value}\nالهاتف: ${cphone.value}\nالعنوان: ${caddress.value}\nالدفع: ${cpayment.value}\nملاحظات: ${cnote.value||'لا يوجد'}`;window.open(`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');cart=[];save();closeCheckout();updateCart()}
 function openAdmin(){let p=prompt('Admin Password');if(p!==settings.password)return alert('كلمة المرور غير صحيحة');document.getElementById('adminModal').classList.add('show');renderAdmin()}
-window.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='s'){e.preventDefault();openAdmin()}});function closeAdmin(){document.getElementById('adminModal').classList.remove('show')}
+window.addEventListener('keydown',e=>{if(e.ctrlKey&&e.altKey&&e.key.toLowerCase()==='s'){e.preventDefault();openAdmin()}});function closeAdmin(){document.getElementById('adminModal').classList.remove('show')}
 async function uploadProductImage(){
   const file=aFile.files[0];
   if(!file)return alert('اختار صورة أولاً');
